@@ -5,11 +5,12 @@
     justify-content: center;
 
     gap: 20px;
+    margin-top: 20px;
 }
 
-.van--card {
-    /* border: 1px solid black; */
-}
+/* .van--card {
+    border: 1px solid black;
+} */
 
 .van--card--image {
     width: 300px;
@@ -43,4 +44,9 @@
     transition: 200ms all cubic-bezier(0.4, 0, 0.2, 1);
 
     margin-top: 5px;
+}
+
+.van--link {
+    text-decoration: none;
+    color: black;
 }

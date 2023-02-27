@@ -7,6 +7,7 @@ import './App.css'
 
 import '../server.js'
 import Vans from './pages/Vans'
+import VanDetails from './pages/VanDetails'
 
 function Home(){
     return(
@@ -54,6 +55,7 @@ function App() {
             <Route path='/'  element={<Home />}/>
             <Route path='/about'  element={<About />}/>
             <Route path='/vans'  element={<Vans />}/>
+            <Route path='/vans/:id'  element={<VanDetails />}/>
         </Routes>
 
 

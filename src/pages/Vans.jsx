@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react"
+import { Link } from "react-router-dom"
 
 import './Vans.css'
 
 function VanCard({imageUrl, name, price, type}){
     return(
         <div className="van--card">
-            
+
             <img src={imageUrl} className="van--card--image"/>
             <div className="van--info">
                <span>{name}</span> 
@@ -32,16 +33,18 @@ function Vans(){
 
     let vansElements = vans.map( van => {
         return <div key={van.id}>
-                  <VanCard name={van.name} 
-                           price={van.price} 
-                           imageUrl={van.imageUrl} 
-                           type={van.type}/>  
+                  <Link to={`/vans/${van.id}`} className="van--link">
+                    <VanCard name={van.name} 
+                            price={van.price} 
+                            imageUrl={van.imageUrl} 
+                            type={van.type}/>  
+                 </Link>  
                </div>
     })
 
     return(
         <div>
-            <h1>Vans</h1>
+            <h1>Explore Our Vans Options</h1>
 
             <div className="vans--container">
 
