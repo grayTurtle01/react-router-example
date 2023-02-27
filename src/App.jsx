@@ -5,6 +5,9 @@ import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
 
 import './App.css'
 
+import '../server.js'
+import Vans from './pages/Vans'
+
 function Home(){
     return(
         <div>
@@ -21,13 +24,6 @@ function About(){
     )
 }
 
-function Vans(){
-    return(
-        <div>
-            <h1>Vans</h1>
-        </div>
-    )
-}
 
 function NavBar(){
     return(
@@ -61,7 +57,7 @@ function App() {
         </Routes>
 
 
-        <Footer />
+        {/* <Footer /> */}
 
     </BrowserRouter>
   )
