@@ -9,6 +9,11 @@ import '../server.js'
 import Vans from './pages/Vans'
 import VanDetails from './pages/VanDetails'
 import Layout from './components/Layout'
+import Dashboard from './components/Host/Dashboard'
+import Income from './components/Host/Income'
+import Reviews from './components/Host/Reviews'
+import HostLayout from './components/Host/HostLayout'
+import Footer from './components/Footer'
 
 function Home() {
     return (
@@ -27,13 +32,7 @@ function About() {
 }
 
 
-function Footer() {
-    return (
-        <footer className='vans--footer'>
-            @ 2023 App
-        </footer>
-    )
-}
+
 
 function App() {
     return (
@@ -47,11 +46,15 @@ function App() {
                     <Route path='/about' element={<About />} />
                     <Route path='/vans' element={<Vans />} />
                     <Route path='/vans/:id' element={<VanDetails />} />
+
+                    <Route path='/host' element={<HostLayout />} >
+                        <Route index element={<Dashboard />} />
+                        <Route path='income' element={<Income />} />
+                        <Route path='reviews' element={<Reviews />} />
+                    </Route>
+
                 </Route>
             </Routes>
-
-
-            {/* <Footer /> */}
 
         </BrowserRouter>
     )
