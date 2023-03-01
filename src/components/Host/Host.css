@@ -9,8 +9,43 @@
     margin-top: 20px;
 
     background: white;
+    padding: 10px;
 }
 
 .host-vans-card img {
     width: 100px;
+}
+
+.host-van-details-card {
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.host-van-details-header{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.host-van-detail-button {
+    background: orange;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.host-van-details-card img{
+    height: 200px;
+}
+
+
+.host-van-details-card a{
+    margin-right: 10px;
+    color: black;
+    text-decoration: none;
+}
+
+.host-van-details-card a:hover{
+    text-decoration: underline;
 }
