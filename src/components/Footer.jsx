@@ -1,7 +1,7 @@
 function Footer() {
     return (
         <footer className='vans--footer'>
-            &reg; 2023 App
+            &copy; 2023 App
         </footer>
     )
 }

@@ -1,15 +1,22 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
 
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
+
+let link_style = {
+    fontWeight: 'bold',
+    textDecoration: 'underline'
+}
+
+const foo = ({isActive}) => isActive? link_style: {}
 
 function DashboardNav() {
     return (
         <header>
             <nav className='host--nav'>
-                <Link to={'/host/'}>Dashboard</Link>
-                <Link to={'/host/income'}>Income</Link>
-                <Link to={'/host/reviews'}>Reviews</Link>
+                <NavLink style={foo} to={'/host/'}>Dashboard</NavLink>
+                <NavLink style={foo} to={'/host/income'}>Income</NavLink>
+                <NavLink style={foo} to={'/host/reviews'}>Reviews</NavLink>
             </nav>
         </header>
     )

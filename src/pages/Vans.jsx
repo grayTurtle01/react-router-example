@@ -48,7 +48,7 @@ function Vans(){
 
             <div className="vans--container">
 
-                {vansElements}
+                {vans ? vansElements : <h1>Loading ...</h1>} 
             </div>
         </div>
     )

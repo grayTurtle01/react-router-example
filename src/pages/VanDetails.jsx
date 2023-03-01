@@ -23,10 +23,10 @@ function VanDetails() {
 
 
     return (
+     
         <div className='van--details'>
-
             <img src={van.imageUrl} className='van--details--image'/>
-            <button>Boton</button>
+            <button>Rent Van</button>
             <h2>{van.name}</h2>
             <p>${van.price}/day</p>
 

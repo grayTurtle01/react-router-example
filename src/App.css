@@ -53,5 +53,15 @@ h1 {
 
 /* Host */
 .host--nav > a {
-    color: gray;
+    color: black;
+}
+
+.active {
+    font-weight: bold;
+}
+
+.is-active {
+    font-weight: bold;
+    text-decoration: underline;
+    color: #161616;
 }
