@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import {  NavLink, useParams } from 'react-router-dom'
+import { Link, NavLink, Outlet, useParams } from 'react-router-dom'
 
 function HostVan() {
     const [van, setVan] = useState({})
@@ -25,6 +25,8 @@ function HostVan() {
     return (
         <div className='host-van-details-card'>
 
+            <Link to={'..'} > &larr; Back to all Vans</Link>
+
             <header className='host-van-details-header'>
                 <img src={van.imageUrl} />
                 
@@ -36,10 +38,12 @@ function HostVan() {
             </header>
 
             <footer>
-                <NavLink style={ foo }to={'/host/vans/:id/details'}>Details</NavLink>
-                <NavLink style={ foo }to={'/host/vans/:id/pricing'}>Pricing</NavLink>
-                <NavLink style={ foo }to={'/host/vans/:id/photos'}>Photos</NavLink>
+                <NavLink style={ foo } to={`.`} end>Details</NavLink>
+                <NavLink style={ foo } to={`pricing`}>Pricing</NavLink>
+                <NavLink style={ foo } to={`photos`}>Photos</NavLink>
             </footer>
+
+            <Outlet context={ { van } }/>
 
         </div>
     )

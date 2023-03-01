@@ -14,10 +14,10 @@ function DashboardNav() {
     return (
         <header>
             <nav className='host--nav'>
-                <NavLink style={foo} to={'/host/'}>Dashboard</NavLink>
-                <NavLink style={foo} to={'/host/income'}>Income</NavLink>
-                <NavLink style={foo} to={'/host/vans'}>Vans</NavLink>
-                <NavLink style={foo} to={'/host/reviews'}>Reviews</NavLink>
+                <NavLink style={foo} to={'.'} end>Dashboard</NavLink>
+                <NavLink style={foo} to={'income'}>Income</NavLink>
+                <NavLink style={foo} to={'vans'}>Vans</NavLink>
+                <NavLink style={foo} to={'reviews'}>Reviews</NavLink>
             </nav>
         </header>
     )
