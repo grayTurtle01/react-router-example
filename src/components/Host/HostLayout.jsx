@@ -16,6 +16,7 @@ function DashboardNav() {
             <nav className='host--nav'>
                 <NavLink style={foo} to={'/host/'}>Dashboard</NavLink>
                 <NavLink style={foo} to={'/host/income'}>Income</NavLink>
+                <NavLink style={foo} to={'/host/vans'}>Vans</NavLink>
                 <NavLink style={foo} to={'/host/reviews'}>Reviews</NavLink>
             </nav>
         </header>

@@ -1,0 +1,16 @@
+.host-vans-card {
+    height: 100px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    width: 80%;
+    margin: auto;
+    margin-top: 20px;
+
+    background: white;
+}
+
+.host-vans-card img {
+    width: 100px;
+}
