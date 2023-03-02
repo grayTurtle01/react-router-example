@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, } from 'react-router-dom'
 
 
 import './App.css'
@@ -13,7 +13,6 @@ import Dashboard from './components/Host/Dashboard'
 import Income from './components/Host/Income'
 import Reviews from './components/Host/Reviews'
 import HostLayout from './components/Host/HostLayout'
-import Footer from './components/Footer'
 import HostVans from './components/Host/HostVans'
 import HostVan from './components/Host/HostVan'
 import HostVanPricing from './components/Host/HostVanPricing'
@@ -21,6 +20,7 @@ import HostVanPhotos from './components/Host/HostVanPhotos'
 import HostVanInfo from './components/Host/HostVanInfo'
 
 function Home() {
+   
     return (
         <div>
             <h1>Home</h1>
