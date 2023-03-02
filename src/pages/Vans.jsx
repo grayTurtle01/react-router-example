@@ -22,7 +22,6 @@ function Vans() {
     const [searchParams, setSearchParams] = useSearchParams()
 
     let typeFilter = searchParams.get('type')
-    console.log(typeFilter);
 
     useEffect(() => {
         fetch('/api/vans')
