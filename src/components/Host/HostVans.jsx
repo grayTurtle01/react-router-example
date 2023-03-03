@@ -21,7 +21,7 @@ function HostVans() {
                 vans.map(van => {
 
                     return (
-                        <Link to={`/host/vans/${van.id}`} key={van.id}  style={{ color: 'black', textDecoration:'none'}} >
+                        <Link to={van.id} key={van.id}  style={{ color: 'black', textDecoration:'none'}} >
                             <div  className='host-vans-card'>
                                 <img src={van.imageUrl} />
 

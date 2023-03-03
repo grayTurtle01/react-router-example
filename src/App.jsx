@@ -18,6 +18,7 @@ import HostVan from './components/Host/HostVan'
 import HostVanPricing from './components/Host/HostVanPricing'
 import HostVanPhotos from './components/Host/HostVanPhotos'
 import HostVanInfo from './components/Host/HostVanInfo'
+import NotFound from './components/NotFound'
 
 function Home() {
    
@@ -67,6 +68,7 @@ function App() {
 
                     </Route>
 
+                    <Route path='*' element={<NotFound />} />
                 </Route>
             </Routes>
 

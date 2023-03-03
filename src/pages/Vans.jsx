@@ -21,6 +21,7 @@ function Vans() {
     const [vans, setVans] = useState([])
     const [searchParams, setSearchParams] = useSearchParams()
 
+
     let typeFilter = searchParams.get('type')
 
     useEffect(() => {
@@ -39,7 +40,8 @@ function Vans() {
 
     let vansElements = filteredVans.map(van => {
         return <div key={van.id}>
-            <Link to={`${van.id}`} className="van--link">
+            <Link to={van.id} className="van--link" state={ { search: '?'+searchParams.toString(),
+                                                             type: typeFilter } }>
                 <VanCard name={van.name}
                     price={van.price}
                     imageUrl={van.imageUrl}
