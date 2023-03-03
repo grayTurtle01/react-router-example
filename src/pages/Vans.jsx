@@ -17,20 +17,46 @@ function VanCard({ imageUrl, name, price, type }) {
     )
 }
 
+async function getVans(){
+    let res = await fetch('/api/vans')
+
+   if( !res.ok ){
+        throw {
+            msg: 'Some error on the request'
+        }
+   }else{
+     let data = await res.json()
+     return data.vans
+   }
+
+}
+
 function Vans() {
     const [vans, setVans] = useState([])
     const [searchParams, setSearchParams] = useSearchParams()
+    const [loading, setLoading] = useState(false)
+    const [error, setError] = useState('')
 
 
     let typeFilter = searchParams.get('type')
 
     useEffect(() => {
-        fetch('/api/vans')
-            .then(res => res.json())
-            .then(data => {
-                setVans(data.vans);
+        setLoading(true)
 
-            })
+        async function loadVans(){
+            try{
+
+                let vans = await getVans()
+                setVans(vans)
+            }catch(err){
+                setError('Some Error with the Request')
+            }finally{
+                setLoading(false)
+
+            }
+        }
+        
+        loadVans()     
 
     }, [])
 
@@ -60,6 +86,15 @@ function Vans() {
             }
             return prevParams
         })
+    }
+
+
+    if( error ){
+        return <h1>Error: {error}</h1>
+    }
+
+    if( loading ){
+        return <h1>Loading...</h1>
     }
 
     return (
@@ -96,7 +131,7 @@ function Vans() {
 
             <div className="vans--container">
 
-                {vans ? vansElements : <h1>Loading ...</h1>}
+                {vansElements}
             </div>
         </div>
     )
