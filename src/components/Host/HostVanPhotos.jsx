@@ -5,9 +5,9 @@ function HostVanPhotos() {
   const {van} = useOutletContext()
 
   return (
-    <div>
-        <h1>HostVanPhotos</h1>
-        <img src={van.imageUrl} height="50" />
+    <div className='host-van-photos'>
+        {/* <h1>HostVanPhotos</h1> */}
+        <img src={van.imageUrl} className="host-van-photo" />
     </div>
   )
 }

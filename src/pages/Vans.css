@@ -78,3 +78,7 @@
     background: black;
     color: white;
 }
+
+.selected {
+    border-bottom: 5px solid red;
+}

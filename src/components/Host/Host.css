@@ -36,7 +36,7 @@
 }
 
 .host-van-details-card img{
-    height: 200px;
+    width: 200px;
 }
 
 
@@ -46,6 +46,12 @@
     text-decoration: none;
 }
 
+
 .host-van-details-card a:hover{
     text-decoration: underline;
+}
+
+
+.host-van-photos {
+    height: 300px;
 }

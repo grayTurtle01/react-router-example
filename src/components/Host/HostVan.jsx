@@ -25,7 +25,7 @@ function HostVan() {
     return (
         <div className='host-van-details-card'>
 
-            <Link to={'..'} > &larr; Back to all Vans</Link>
+            <Link to={'./..'} > &larr; Back to all Vans</Link>
 
             <header className='host-van-details-header'>
                 <img src={van.imageUrl} />
