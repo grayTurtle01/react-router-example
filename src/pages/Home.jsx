@@ -1,8 +1,14 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
 import imagen from '../assets/home-hero.png'
 
+export function loader(){
+    // throw new Error('Hello Error')
+    return "Hello from hello-Loader"
+}
+
 export function Home() {
+    let data = useLoaderData()
 
     return (
         <div className='home'>

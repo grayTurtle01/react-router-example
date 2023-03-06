@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react"
-import { Link, useSearchParams } from "react-router-dom"
+import { useState } from "react"
+import { Link, useLoaderData, useSearchParams } from "react-router-dom"
 
 import './Vans.css'
 
@@ -18,7 +18,8 @@ function VanCard({ imageUrl, name, price, type }) {
 }
 
 async function getVans(){
-    let res = await fetch('/api/vans')
+
+   let res = await fetch('/api/vans')
 
    if( !res.ok ){
         throw {
@@ -31,34 +32,19 @@ async function getVans(){
 
 }
 
+export function loader(){
+    return getVans()
+
+}
+
 function Vans() {
-    const [vans, setVans] = useState([])
     const [searchParams, setSearchParams] = useSearchParams()
-    const [loading, setLoading] = useState(false)
     const [error, setError] = useState('')
 
+    const vans = useLoaderData()
 
     let typeFilter = searchParams.get('type')
 
-    useEffect(() => {
-        setLoading(true)
-
-        async function loadVans(){
-            try{
-
-                let vans = await getVans()
-                setVans(vans)
-            }catch(err){
-                setError('Some Error with the Request')
-            }finally{
-                setLoading(false)
-
-            }
-        }
-        
-        loadVans()     
-
-    }, [])
 
     let filteredVans = typeFilter ?
         vans.filter(obj => obj.type === typeFilter) :
@@ -91,10 +77,6 @@ function Vans() {
 
     if( error ){
         return <h1>Error: {error}</h1>
-    }
-
-    if( loading ){
-        return <h1>Loading...</h1>
     }
 
     return (
