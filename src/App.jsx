@@ -19,26 +19,8 @@ import HostVanPricing from './components/Host/HostVanPricing'
 import HostVanPhotos from './components/Host/HostVanPhotos'
 import HostVanInfo from './components/Host/HostVanInfo'
 import NotFound from './components/NotFound'
-
-function Home() {
-   
-    return (
-        <div>
-            <h1>Home</h1>
-        </div>
-    )
-}
-
-function About() {
-    return (
-        <div>
-            <h1>About</h1>
-        </div>
-    )
-}
-
-
-
+import { Home } from './pages/Home'
+import { About } from './pages/About'
 
 function App() {
     return (
