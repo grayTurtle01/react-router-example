@@ -1,7 +1,16 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
+
+
 
 function Header() {
+    let navigate = useNavigate()
+
+    function handleClick(){
+        localStorage.removeItem('logged')
+        navigate('/login')
+    }
+
     return (
         <header>
             <nav>
@@ -16,6 +25,10 @@ function Header() {
                          to={'/vans'}>Vans</NavLink>
                 <NavLink className={ ({isActive}) => isActive? 'is-active': '' } 
                          to={'/login'}>Login</NavLink>
+
+                {   localStorage.getItem('logged') &&
+                    <button onClick={ handleClick }>LogOut</button>
+                }
             </nav>
         </header>
     )

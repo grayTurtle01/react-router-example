@@ -39,7 +39,6 @@ const router = createBrowserRouter(createRoutesFromElements(
 
 
         <Route element={<AuthRequired />}>
-            <Route path='protected' element={<h1>Super Secrete Info</h1>} />
             <Route path='/host' element={<HostLayout />} >
                 <Route index element={<Dashboard />} />
                 <Route path='income' element={<Income />} />
@@ -54,6 +53,9 @@ const router = createBrowserRouter(createRoutesFromElements(
                 </Route>
 
             </Route>
+
+            <Route path='protected' element={<h1>Super Secrete Info</h1>} />
+            
         </Route>
 
 
