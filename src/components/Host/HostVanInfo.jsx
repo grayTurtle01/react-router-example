@@ -6,7 +6,6 @@ function HostVanInfo() {
 
   return (
     <div>
-      <h1>{van.name}</h1>
       <p>{van.description}</p>
     </div>
   )

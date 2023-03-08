@@ -1,16 +1,39 @@
-import React from "react"
-import { useLocation } from "react-router-dom"
+import React, { useState } from "react"
+import { useLocation, useNavigate } from "react-router-dom"
+import { loginUser } from "../../services"
 
 import './Login.css'
 
 export default function Login() {
     const [loginFormData, setLoginFormData] = React.useState({ email: "", password: "" })
     const location = useLocation()
+    const [status, setStatus] = useState('idle')
+    const [error, setError] = useState(null)
+
+    const navigate = useNavigate()
 
 
     function handleSubmit(e) {
         e.preventDefault()
-        console.log(loginFormData)
+       
+        setStatus('submitting')
+        setError(null)
+
+        loginUser( loginFormData )
+            .then( res => {
+                console.log(res);
+                setError(null)
+                navigate('/host')
+            })
+            .catch( err => {
+                console.log(err);
+                setError(err)
+                
+            }).finally( () => {
+                setStatus('idle')
+                
+            })
+            
     }
 
     function handleChange(e) {
@@ -21,12 +44,14 @@ export default function Login() {
         }))
     }
 
+  
     return (
         <div className="login-container">
 
             { location.state && <h1>{location.state.message}</h1>}
 
             <h1>Sign in to your account</h1>
+            <h2 className="error">{ error && error.message }</h2>
 
             <form onSubmit={handleSubmit} className="login-form">
                 <input
@@ -43,7 +68,9 @@ export default function Login() {
                     placeholder="Password"
                     value={loginFormData.password}
                 />
-                <button>Log in</button>
+                { status === 'idle'? 
+                 <button>Log in</button> : 
+                 <button disabled>Log in ...</button> }
             </form>
         </div>
     )

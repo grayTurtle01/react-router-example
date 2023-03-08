@@ -10,7 +10,7 @@ function HostVan() {
         fetch(`/api/host/vans/${parameters.id}`)
             .then( res => res.json() )
             .then( data => {
-                setVan(data.vans[0]);
+                setVan(data.vans);
             })
     }, [])
 
@@ -21,6 +21,9 @@ function HostVan() {
     
     const foo = ({isActive}) => isActive? link_style: {}
     
+    if( !van ){
+        return <h1>Loading ...</h1>
+    }
 
     return (
         <div className='host-van-details-card'>

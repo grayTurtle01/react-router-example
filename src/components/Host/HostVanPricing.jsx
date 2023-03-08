@@ -6,7 +6,6 @@ function HostVanPricing() {
 
   return (
     <div>
-      <h1>HostVanPricing</h1>
       <h2>${van.price}/day</h2>
     </div>
   )

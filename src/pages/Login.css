@@ -53,3 +53,12 @@
     border-radius: 5px;
     border: none;
 }
+
+.button-disabled {
+    background: white;
+    color: 'red'
+}
+
+.error {
+    color: red
+}

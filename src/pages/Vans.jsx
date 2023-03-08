@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { Link, useLoaderData, useSearchParams } from "react-router-dom"
+import { getVans } from "../../services"
 
 import './Vans.css'
 
@@ -17,20 +18,7 @@ function VanCard({ imageUrl, name, price, type }) {
     )
 }
 
-async function getVans(){
 
-   let res = await fetch('/api/vans')
-
-   if( !res.ok ){
-        throw {
-            msg: 'Some error on the request'
-        }
-   }else{
-     let data = await res.json()
-     return data.vans
-   }
-
-}
 
 export function loader(){
     return getVans()

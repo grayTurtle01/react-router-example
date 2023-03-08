@@ -3,7 +3,7 @@ import { Navigate, Outlet } from 'react-router-dom'
 
 function AuthRequired() {
 
-    let auth = { token: '' }
+    let auth = { token: '123' }
 
     if( !auth.token ){
         return <Navigate to='/login' state={ {message:'You must login first'}} />
