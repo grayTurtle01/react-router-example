@@ -1,8 +1,22 @@
 import React, { useState } from "react"
-import { useLocation, useNavigate } from "react-router-dom"
+import { Form, useLocation, useNavigate } from "react-router-dom"
 import { loginUser } from "../../services"
 
 import './Login.css'
+
+export async function action(obj){
+    let { request, params } = obj
+    let formData = await request.formData()
+
+    let email = formData.get('email')
+    let password = formData.get('password')
+
+    let data = await loginUser({email, password})
+    localStorage.setItem('logged', true)
+
+
+    return 'foo'
+}
 
 export default function Login() {
     const [loginFormData, setLoginFormData] = React.useState({ email: "", password: "" })
@@ -12,7 +26,7 @@ export default function Login() {
 
     const navigate = useNavigate()
 
-    const { lastPath } = location.state ?? '/host'
+    const { lastPath } = location.state ?? '/'
 
     function handleSubmit(e) {
         e.preventDefault()
@@ -46,13 +60,14 @@ export default function Login() {
         }))
     }
 
-  
     function fillFields(){
         setLoginFormData({
             email: 'b@b.com',
             password: 'p123'
         })
     }
+
+  
 
     return (
         <div className="login-container">
@@ -62,7 +77,7 @@ export default function Login() {
             <h1>Sign in to your account</h1>
             <h2 className="error">{ error && error.message }</h2>
 
-            <form onSubmit={handleSubmit} className="login-form">
+            <Form action='/login' method="post" className="login-form">
                 <input
                     name="email"
                     onChange={handleChange}
@@ -80,7 +95,7 @@ export default function Login() {
                 { status === 'idle'? 
                  <button>Log in</button> : 
                  <button disabled>Log in ...</button> }
-            </form>
+            </Form>
 
             <button onClick={ fillFields }>Dummy Creedentials</button>
         </div>
