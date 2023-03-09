@@ -1,104 +1,77 @@
 import React, { useState } from "react"
-import { Form, useLocation, useNavigate } from "react-router-dom"
+import { Form, Navigate, useActionData, useLocation, useNavigate, useNavigation } from "react-router-dom"
 import { loginUser } from "../../services"
 
 import './Login.css'
 
-export async function action(obj){
+async function action(obj){
     let { request, params } = obj
     let formData = await request.formData()
 
     let email = formData.get('email')
     let password = formData.get('password')
 
-    let data = await loginUser({email, password})
-    localStorage.setItem('logged', true)
+    try{
+
+        let data = await loginUser({email, password})
+        localStorage.setItem('logged', true)
+        return data
+
+    }catch(err){
+        return {
+            error: err.message
+        }
+    }
 
 
-    return 'foo'
 }
 
 export default function Login() {
-    const [loginFormData, setLoginFormData] = React.useState({ email: "", password: "" })
-    const location = useLocation()
-    const [status, setStatus] = useState('idle')
-    const [error, setError] = useState(null)
-
+    
     const navigate = useNavigate()
+    
+    const location = useLocation()
+    const  lastPath  = location.state?.lastPath || '/'
 
-    const { lastPath } = location.state ?? '/'
+    
+    let data =  useActionData()
+    if (data?.token) {
+        // console.log(location.state);
 
-    function handleSubmit(e) {
-        e.preventDefault()
-       
-        setStatus('submitting')
-        setError(null)
-
-        loginUser( loginFormData )
-            .then( res => {
-                console.log(res);
-                setError(null)
-                localStorage.setItem('logged', true)
-                navigate(lastPath, { replace: true} )
-            })
-            .catch( err => {
-                console.log(err);
-                setError(err)
-                
-            }).finally( () => {
-                setStatus('idle')
-                
-            })
-            
+        // navigate(lastPath ?? '/host')
+        return <Navigate to='/host' />
     }
 
-    function handleChange(e) {
-        const { name, value } = e.target
-        setLoginFormData(prev => ({
-            ...prev,
-            [name]: value
-        }))
-    }
-
-    function fillFields(){
-        setLoginFormData({
-            email: 'b@b.com',
-            password: 'p123'
-        })
-    }
-
-  
+    const navigation = useNavigation()
+    console.log(navigation);
 
     return (
         <div className="login-container">
 
+            { data?.error && <h3 className="error">{data.error}</h3>}
             { location.state && <h1 className="error">{location.state.message}</h1>}
 
             <h1>Sign in to your account</h1>
-            <h2 className="error">{ error && error.message }</h2>
 
             <Form action='/login' method="post" className="login-form">
                 <input
                     name="email"
-                    onChange={handleChange}
                     type="email"
                     placeholder="Email address"
-                    value={loginFormData.email}
                 />
                 <input
-                    name="password"
-                    onChange={handleChange}
+                    name="password"  
                     type="password"
                     placeholder="Password"
-                    value={loginFormData.password}
                 />
-                { status === 'idle'? 
+                { navigation.state === 'idle'? 
                  <button>Log in</button> : 
                  <button disabled>Log in ...</button> }
             </Form>
 
-            <button onClick={ fillFields }>Dummy Creedentials</button>
         </div>
     )
 
 }
+
+export { action }

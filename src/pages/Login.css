@@ -54,6 +54,11 @@
     border: none;
 }
 
+.login-form button:disabled {
+    background: #AAA;
+    cursor: not-allowed;
+}
+
 .button-disabled {
     background: white;
     color: 'red'

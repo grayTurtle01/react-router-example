@@ -8,7 +8,7 @@ function Header() {
 
     function handleClick(){
         localStorage.removeItem('logged')
-        navigate('/login')
+        navigate('/')
     }
 
     return (

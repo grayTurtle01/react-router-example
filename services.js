@@ -14,12 +14,12 @@ export async function getVans() {
 
 export async function loginUser(creds) {
 
-    const res = await fetch("/api/login", { 
-            method: "post", 
-            body: JSON.stringify(creds) 
-        }
+    const res = await fetch("/api/login", {
+        method: "post",
+        body: JSON.stringify(creds)
+    }
     )
-    
+
     const data = await res.json()
 
     if (!res.ok) {

@@ -6,9 +6,10 @@ function AuthRequired() {
 
     let isLogged = localStorage.getItem('logged')
 
+
     if( !isLogged ){
-        return <Navigate to='/login' 
-                         replace
+        return <Navigate to='/login'
+                         replace 
                          state={ 
                             { 
                                 message:'You must login first',
