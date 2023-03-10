@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React from "react"
 import { Form, Navigate, useActionData, useLocation, useNavigate, useNavigation } from "react-router-dom"
 import { loginUser } from "../../services"
 
@@ -28,7 +28,6 @@ async function action(obj){
 
 export default function Login() {
     
-    const navigate = useNavigate()
     
     const location = useLocation()
     const  lastPath  = location.state?.lastPath || '/'
@@ -43,7 +42,16 @@ export default function Login() {
     }
 
     const navigation = useNavigation()
-    console.log(navigation);
+
+    function foo(){
+        let input_mail = document.querySelector('input[name="email"]')
+        input_mail.value = 'b@b.com'
+
+        let input_pass = document.querySelector('input[name="password"]')
+        input_pass.value = 'p123'
+
+
+    }
 
     return (
         <div className="login-container">
@@ -68,6 +76,8 @@ export default function Login() {
                  <button>Log in</button> : 
                  <button disabled>Log in ...</button> }
             </Form>
+
+            <button onClick={ foo }>Dummy Credentials</button>
 
         </div>
     )
