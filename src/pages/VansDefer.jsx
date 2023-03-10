@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { Link, useLoaderData, useSearchParams } from "react-router-dom"
+import { Link, useLoaderData, useSearchParams, defer, Await } from "react-router-dom"
 import { getVans } from "../../services"
 
 import './Vans.css'
@@ -19,35 +19,18 @@ function VanCard({ imageUrl, name, price, type }) {
 }
 
 async function loader(){
-    let vans = await getVans()
-    return vans
+    let promise =  getVans()
+    return defer( {vans: promise} )
 
 }
 
-function Vans() {
+function VansDefer() {
     const [searchParams, setSearchParams] = useSearchParams()
     const [error, setError] = useState('')
 
-    const vans = useLoaderData()
+    const loaderData = useLoaderData()
 
     let typeFilter = searchParams.get('type')
-
-
-    let filteredVans = typeFilter ?
-        vans.filter(obj => obj.type === typeFilter) :
-        vans
-
-    let vansElements = filteredVans.map(van => {
-        return <div key={van.id}>
-            <Link to={van.id} className="van--link" state={ { search: '?'+searchParams.toString(),
-                                                             type: typeFilter } }>
-                <VanCard name={van.name}
-                    price={van.price}
-                    imageUrl={van.imageUrl}
-                    type={van.type} />
-            </Link>
-        </div>
-    })
 
 
     function handleFilterChange(key, value) {
@@ -100,12 +83,34 @@ function Vans() {
 
             <div className="vans--container">
 
-                {vansElements}
+                <Await resolve={ loaderData.vans }>
+                 {
+                    (vans) => {
+                        let filteredVans = typeFilter ?
+                                            vans.filter(obj => obj.type === typeFilter) :
+                                            vans
+                
+                        let vansElements = filteredVans.map(van => {
+                            return <div key={van.id}>
+                                <Link to={van.id} className="van--link" state={ { search: '?'+searchParams.toString(),
+                                                                                type: typeFilter } }>
+                                    <VanCard name={van.name}
+                                        price={van.price}
+                                        imageUrl={van.imageUrl}
+                                        type={van.type} />
+                                </Link>
+                            </div>
+                        })
+
+                        return vansElements
+                    }
+                 }
+                </Await>
             </div>
         </div>
     )
 }
 
 
-export default Vans
+export default VansDefer
 export { loader }

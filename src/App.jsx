@@ -25,6 +25,7 @@ import { About } from './pages/About'
 import Error from './components/Error'
 import Login, { action as loginAction } from './pages/Login'
 import AuthRequired from './components/AuthRequired'
+import VansDefer, {loader as vansDeferLoader} from './pages/VansDefer'
 
 const router = createBrowserRouter(createRoutesFromElements(
     <Route element={<Layout />} errorElement={<Error />}>
@@ -32,7 +33,9 @@ const router = createBrowserRouter(createRoutesFromElements(
         <Route path='/' element={<Home />}
                loader={homeLoader} />
         <Route path='/about' element={<About />} />
-        <Route path='/vans' element={<Vans />} loader={vansLoader} />
+        {/* <Route path='/vans' element={<Vans />} loader={vansLoader} /> */}
+        <Route path='/vans' element={<VansDefer />} loader={vansDeferLoader} />
+
         <Route path='login' element={<Login />} action={loginAction}/>
 
         <Route path='/vans/:id' element={<VanDetails />} />
