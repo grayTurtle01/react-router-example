@@ -44,6 +44,25 @@ function VansDefer() {
         })
     }
 
+    function renderVansElements (vans) {
+        let filteredVans = typeFilter ?
+                            vans.filter(obj => obj.type === typeFilter) :
+                            vans
+
+        let vansElements = filteredVans.map(van => {
+            return <div key={van.id}>
+                <Link to={van.id} className="van--link" state={ { search: '?'+searchParams.toString(),
+                                                                type: typeFilter } }>
+                    <VanCard name={van.name}
+                        price={van.price}
+                        imageUrl={van.imageUrl}
+                        type={van.type} />
+                </Link>
+            </div>
+        })
+
+        return vansElements
+    }
 
     if( error ){
         return <h1>Error: {error}</h1>
@@ -84,27 +103,7 @@ function VansDefer() {
             <div className="vans--container">
 
                 <Await resolve={ loaderData.vans }>
-                 {
-                    (vans) => {
-                        let filteredVans = typeFilter ?
-                                            vans.filter(obj => obj.type === typeFilter) :
-                                            vans
-                
-                        let vansElements = filteredVans.map(van => {
-                            return <div key={van.id}>
-                                <Link to={van.id} className="van--link" state={ { search: '?'+searchParams.toString(),
-                                                                                type: typeFilter } }>
-                                    <VanCard name={van.name}
-                                        price={van.price}
-                                        imageUrl={van.imageUrl}
-                                        type={van.type} />
-                                </Link>
-                            </div>
-                        })
-
-                        return vansElements
-                    }
-                 }
+                    { renderVansElements }
                 </Await>
             </div>
         </div>
