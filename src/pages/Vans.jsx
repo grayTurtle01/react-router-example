@@ -18,7 +18,7 @@ function VanCard({ imageUrl, name, price, type }) {
     )
 }
 
-async function loader(){
+async function loader() {
     let vans = await getVans()
     return vans
 
@@ -39,8 +39,10 @@ function Vans() {
 
     let vansElements = filteredVans.map(van => {
         return <div key={van.id}>
-            <Link to={van.id} className="van--link" state={ { search: '?'+searchParams.toString(),
-                                                             type: typeFilter } }>
+            <Link to={van.id} className="van--link" state={{
+                search: '?' + searchParams.toString(),
+                type: typeFilter
+            }}>
                 <VanCard name={van.name}
                     price={van.price}
                     imageUrl={van.imageUrl}
@@ -62,7 +64,7 @@ function Vans() {
     }
 
 
-    if( error ){
+    if (error) {
         return <h1>Error: {error}</h1>
     }
 
@@ -74,17 +76,17 @@ function Vans() {
 
 
                 <button onClick={() => handleFilterChange('type', 'simple')}
-                    className={`vans-filters-button simple ${typeFilter === 'simple'? 'selected': ''}`}>
+                    className={`vans-filters-button simple ${typeFilter === 'simple' ? 'selected' : ''}`}>
                     Simple
                 </button>
 
                 <button onClick={() => handleFilterChange('type', 'rugged')}
-                    className={`vans-filters-button rugged ${typeFilter === 'rugged'? 'selected': ''}`}>
+                    className={`vans-filters-button rugged ${typeFilter === 'rugged' ? 'selected' : ''}`}>
                     Rugged
                 </button>
 
                 <button onClick={() => handleFilterChange('type', 'luxury')}
-                    className={`vans-filters-button luxury ${typeFilter === 'luxury'? 'selected': ''}`}>
+                    className={`vans-filters-button luxury ${typeFilter === 'luxury' ? 'selected' : ''}`}>
                     Luxury
                 </button>
 

@@ -4,7 +4,8 @@ import { Navigate, Outlet, useLocation } from 'react-router-dom'
 function AuthRequired() {
     let location = useLocation()
 
-    let isLogged = localStorage.getItem('logged')
+    // let isLogged = localStorage.getItem('logged')
+    let isLogged = true
 
 
     if( !isLogged ){

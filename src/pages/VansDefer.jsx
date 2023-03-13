@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { Suspense, useState } from "react"
 import { Link, useLoaderData, useSearchParams, defer, Await } from "react-router-dom"
 import { getVans } from "../../services"
 
@@ -101,10 +101,11 @@ function VansDefer() {
             </div>
 
             <div className="vans--container">
-
-                <Await resolve={ loaderData.vans }>
-                    { renderVansElements }
-                </Await>
+                <Suspense fallback={<h1>Loading...</h1> }>
+                    <Await resolve={ loaderData.vans }>
+                        { renderVansElements }
+                    </Await>
+                </Suspense>
             </div>
         </div>
     )
