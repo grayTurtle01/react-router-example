@@ -3,7 +3,7 @@ function sleep(ms) {
 }
 
 export async function getVans() {
-    await sleep(1000)
+    // await sleep(1000)
     const res = await fetch("/api/vans")
     if (!res.ok) {
         throw {
@@ -15,6 +15,23 @@ export async function getVans() {
     const data = await res.json()
     return data.vans
 }
+
+export async function getVan(id) {
+    // await sleep(1000)
+    const res = await fetch(`/api/vans/${id}`)
+    if (!res.ok) {
+        throw {
+            message: "Failed to fetch van",
+            statusText: res.statusText,
+            status: res.status
+        }
+    }
+
+    const data = await res.json()
+
+    return data.vans
+}
+
 
 export async function getHostVans() {
     await sleep(1000)

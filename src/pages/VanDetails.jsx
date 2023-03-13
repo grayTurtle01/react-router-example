@@ -1,31 +1,24 @@
-import React, { useEffect, useState } from 'react'
-import { Link, useLocation, useParams } from 'react-router-dom'
+import React, { Suspense, useEffect, useState } from 'react'
+import { Await, defer, Link, useLoaderData, useLocation, useParams } from 'react-router-dom'
+import { getVan } from '../../services'
 
 import './VanDetails.css'
 
-function VanDetails() {
+async function loader(obj){
+    let id = obj.params.id;
+    let promise = getVan(id)
+    return defer( {van: promise})
+}
 
-    const params = useParams()
-    
-    const [van, setVan] = useState({})
+function VanDetails() {
 
     const location = useLocation()
     let search = location.state?.search || '' ;
     let type = location.state?.type || 'all'
 
-    let array = search.split('=');
 
-    useEffect( () => {
-        fetch(`/api/vans/${params.id}`)
-            .then( res => res.json() )
-            .then( data => {
-                setVan(data.vans);
-            })
-            .catch( err => {
-                console.log(' => err: ', err);
-            })
-    }, [])
 
+    let loaderData = useLoaderData()
 
     return (
      
@@ -35,15 +28,28 @@ function VanDetails() {
                 &larr; {`Back to ${type} vans`}
             </Link>
 
-            <img src={van.imageUrl} className='van--details--image'/>
-            <button>Rent Van</button>
-            <h2>{van.name}</h2>
-            <p>${van.price}/day</p>
+            <Suspense fallback={ <h3>Loading ...</h3>}>
 
-            <p>{van.description}</p>
+                <Await resolve={ loaderData.van }>
+
+                    {
+                        (van) => {
+                            return <>
+                                    <img src={van.imageUrl} className='van--details--image'/>
+                                    <button>Rent Van</button>
+                                    <h2>{van.name}</h2>
+                                    <p>${van.price}/day</p>
+                    
+                                    <p>{van.description}</p>
+                                </>  
+                    }       
+                    }
+                </Await>
+            </Suspense>
 
         </div>
     )
 }
 
 export default VanDetails
+export { loader }

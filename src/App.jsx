@@ -7,7 +7,8 @@ import './App.css'
 
 import '../server.js'
 import Vans, { loader as vansLoader } from './pages/Vans'
-import VanDetails from './pages/VanDetails'
+import VansDefer, {loader as vansDeferLoader} from './pages/VansDefer'
+import VanDetails, { loader as vanDetailsLoader } from './pages/VanDetails'
 import Layout from './components/Layout'
 import Dashboard from './components/Host/Dashboard'
 import Income from './components/Host/Income'
@@ -25,7 +26,6 @@ import { About } from './pages/About'
 import Error from './components/Error'
 import Login, { action as loginAction } from './pages/Login'
 import AuthRequired from './components/AuthRequired'
-import VansDefer, {loader as vansDeferLoader} from './pages/VansDefer'
 
 const router = createBrowserRouter(createRoutesFromElements(
     <Route element={<Layout />} errorElement={<Error />}>
@@ -38,7 +38,7 @@ const router = createBrowserRouter(createRoutesFromElements(
 
         <Route path='login' element={<Login />} action={loginAction}/>
 
-        <Route path='/vans/:id' element={<VanDetails />} />
+        <Route path='/vans/:id' element={<VanDetails />} loader={ vanDetailsLoader }/>
 
 
         <Route element={<AuthRequired />}>
