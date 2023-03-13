@@ -27,9 +27,15 @@ export async function getVan(id) {
         }
     }
 
-    const data = await res.json()
+    try {
 
-    return data.vans
+        const data = await res.json()
+        return data.vans
+
+    }catch(err){
+        console.log( '---> catch');
+        throw new Error('That id does not exist ') 
+    }
 }
 
 

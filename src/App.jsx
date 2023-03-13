@@ -38,7 +38,8 @@ const router = createBrowserRouter(createRoutesFromElements(
 
         <Route path='login' element={<Login />} action={loginAction}/>
 
-        <Route path='/vans/:id' element={<VanDetails />} loader={ vanDetailsLoader }/>
+        <Route path='/vans/:id' element={<VanDetails />} loader={ vanDetailsLoader }
+                                errorElement={<Error />} />
 
 
         <Route element={<AuthRequired />}>
