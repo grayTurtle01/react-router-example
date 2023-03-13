@@ -1,41 +1,51 @@
-import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import React, { Suspense, useEffect, useState } from 'react'
+import { Await, defer, Link, useLoaderData } from 'react-router-dom'
+import { getHostVans } from '../../../services'
 
 import './Host.css'
 
-function HostVans() {
-    const [vans, setVans] = useState([])
+async function loader(){
+    let promise = getHostVans()
+    return defer( {vans: promise })
 
-    useEffect(() => {
-        fetch('/api/host/vans')
-            .then(res => res.json())
-            .then(data => {
-                setVans(data.vans);
+}
+
+function HostVans() {
+
+
+    let loaderData = useLoaderData()
+
+
+    function renderHostVans(vans){
+        return  vans.map(van => {
+            
+                return (
+                    <Link to={van.id} key={van.id}  style={{ color: 'black', textDecoration:'none'}} >
+                        <div  className='host-vans-card'>
+                            <img src={van.imageUrl} />
+
+                            <div>
+                                <h2>{van.name}</h2>
+                                <span>${van.price}/day</span>
+                            </div>
+                        </div> 
+                    </Link>
+                )
             })
-    }, [])
+    }
 
     return (
         <div>
             <h1>Your listed vans</h1>
-            {
-                vans.map(van => {
+            <Suspense fallback={ <h1>Loading ..</h1>}>
+                <Await resolve={loaderData.vans}>
 
-                    return (
-                        <Link to={van.id} key={van.id}  style={{ color: 'black', textDecoration:'none'}} >
-                            <div  className='host-vans-card'>
-                                <img src={van.imageUrl} />
-
-                                <div>
-                                    <h2>{van.name}</h2>
-                                    <span>${van.price}/day</span>
-                                </div>
-                            </div> 
-                        </Link>
-                        )
-                })
-            }
+                { renderHostVans }
+                </Await>
+            </Suspense>
         </div>
     )
 }
 
 export default HostVans
+export { loader }
