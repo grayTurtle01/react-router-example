@@ -2,6 +2,8 @@ import { Suspense, useState } from "react"
 import { Link, useLoaderData, useSearchParams, defer, Await } from "react-router-dom"
 import { getVans } from "../../services"
 
+import { getAllObjects } from "../../firebase"
+
 import './Vans.css'
 
 function VanCard({ imageUrl, name, price, type }) {
@@ -19,7 +21,8 @@ function VanCard({ imageUrl, name, price, type }) {
 }
 
 async function loader(){
-    let promise =  getVans()
+    // let promise =  getVans()
+    let promise =  getAllObjects()
     return defer( {vans: promise} )
 
 }

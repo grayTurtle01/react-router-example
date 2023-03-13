@@ -2,10 +2,13 @@ import React, { Suspense, useEffect, useState } from 'react'
 import { Await, defer, Link, useLoaderData } from 'react-router-dom'
 import { getHostVans } from '../../../services'
 
+import { getFilteredObjects } from '../../../firebase'
+
 import './Host.css'
 
 async function loader(){
-    let promise = getHostVans()
+    // let promise = getHostVans()
+    let promise = getFilteredObjects()
     return defer( {vans: promise })
 
 }

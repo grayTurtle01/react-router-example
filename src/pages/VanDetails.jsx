@@ -2,11 +2,15 @@ import React, { Suspense, useEffect, useState } from 'react'
 import { Await, defer, Link, useLoaderData, useLocation, useParams } from 'react-router-dom'
 import { getVan } from '../../services'
 
+import { getObject } from '../../firebase'
+
 import './VanDetails.css'
 
 async function loader(obj){
+
     let id = obj.params.id;
-    let promise = getVan(id)
+    // let promise = getVan(id)
+    let promise = getObject(id)
     return defer( {van: promise})
 }
 

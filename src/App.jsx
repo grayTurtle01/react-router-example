@@ -6,7 +6,7 @@ import { Route, createBrowserRouter, createRoutesFromElements, RouterProvider, }
 import './App.css'
 
 import '../server.js'
-import Vans, { loader as vansLoader } from './pages/Vans'
+// import Vans, { loader as vansLoader } from './pages/Vans'
 import VansDefer, {loader as vansDeferLoader} from './pages/VansDefer'
 import VanDetails, { loader as vanDetailsLoader } from './pages/VanDetails'
 import Layout from './components/Layout'

@@ -1,6 +1,8 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { Form, Navigate, useActionData, useLocation, useNavigate, useNavigation } from "react-router-dom"
 import { loginUser } from "../../services"
+
+import { getAllObjects } from "../../firebase"
 
 import './Login.css'
 
@@ -27,19 +29,22 @@ async function action(obj){
 }
 
 export default function Login() {
-    
-    
-    const location = useLocation()
+    const navigate = useNavigate()
+    const location =  useLocation()
     const  lastPath  = location.state?.lastPath || '/'
 
-    
     let data =  useActionData()
-    if (data?.token) {
-        // console.log(location.state);
+    useEffect( () => {
 
-        // navigate(lastPath ?? '/host')
-        return <Navigate to='/host' />
-    }
+        getAllObjects()
+
+        if (data?.token) {
+            // console.log(location.state);
+            
+            navigate(lastPath)
+            // return <Navigate to='/host' />
+        }
+    }, [data])
 
     const navigation = useNavigation()
 
